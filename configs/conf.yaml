@@ -1,0 +1,62 @@
+load_pretrained: False
+strict_load: True
+pretrained_path: ""
+
+name: RVSR
+
+loggers:
+  log_images: True
+
+network:
+  target: models.train_arch.RVSR
+  params:
+    sr_rate: 4
+    N: 16
+
+trainer:
+  base_lr_rate: 5e-4
+  num_epochs: 5000
+  use_Y_channel_in_val: True
+  check_val_every_n_epoch: 20
+  lr_scheduler:
+    target: tools.schedulers.KneeLRScheduler
+    params:
+      peak_lr: 5e-4
+      warmup_steps: 0
+      explore_steps: 1000
+      total_steps: 5000
+      min_lr: 1e-6
+
+data:
+  train:
+    lr_path: ["Path to your low resolution images"]
+    hr_path: ["Path to your high resolution images"]
+    augment: True
+    scale: 4
+    patch_cropsize: 512
+    pool_lr: True
+    pool_hr: True
+    is_train: True
+
+  val:
+    lr_path: ["Path to your low resolution images"]
+    hr_path: ["Path to your high resolution images"]
+    augment: False
+    scale: 4
+    patch_cropsize: False
+    pool_lr: True
+    pool_hr: True
+    is_train: False
+
+loader:
+  train:
+    batch_size: 32
+    shuffle: True
+    num_workers: 8
+    pin_memory: False
+    persistent_workers: True
+  val:
+    batch_size: 1
+    shuffle: False
+    num_workers: 8
+    pin_memory: False
