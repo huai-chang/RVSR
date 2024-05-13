@@ -16,7 +16,7 @@ if __name__ == '__main__':
     lr_monitor = LearningRateMonitor(logging_interval='step')
     checkpoint_callback = ModelCheckpoint(
         monitor="val_psnr",
-        dirpath='./ckpts_hc/',
+        dirpath='./ckpts_rvsr/',
         filename=conf['name'] + "_{epoch:04d}_{val_psnr:.4f}_{val_ssim:.4f}",
         save_top_k=1,
         mode="max",
