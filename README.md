@@ -61,7 +61,7 @@ After training, you can utilize re-parameterization techniques to streamline com
 python3 reparameterize.py --pretrained_path path_to_your_model
 ```
 
-## :memo:TODE
+## :memo:TODO
 - [x] Release code and pretrained models
 
 ## :heart: Acknowledgement
